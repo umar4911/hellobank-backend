@@ -16,6 +16,17 @@ function GenerateRandomNum(num) {
   return randomNumber;
 }
 
+function format(template, ...params) {
+  if (params.length === 0) {
+    return template;
+  }
+
+  return template.replace(/%s/g, () => {
+    const nextParam = params.shift();
+    return nextParam !== undefined ? String(nextParam) : "%s";
+  });
+}
+
 function isEmail(email) {
   var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   if (email !== "" && email.match(emailFormat)) {
@@ -27,5 +38,6 @@ function isEmail(email) {
 module.exports = {
   capitalizeString,
   GenerateRandomNum,
+  format,
   isEmail,
 };
