@@ -6,9 +6,11 @@ module.exports = {
     if (!errors[errorCodeName]) {
       errorCodeName = "UNKNOWN_ERROR";
     }
-    let errData = errors[errorCodeName];
+    let errData = structuredClone(errors[errorCodeName]);
     if (params.length !== 0) {
+      console.log(params, errData.message);
       errData.message = format(errData.message, ...params);
+      console.log(errData.message);
     }
 
     res.status(errData.statusCode);

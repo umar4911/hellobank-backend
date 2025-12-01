@@ -28,5 +28,25 @@
     "status": "error",
     "message": "Wrong credentials entered.",
     "statusCode": 400
+  },
+  "ACCOUNT_CLOSED": {
+    "status": "error",
+    "message": "The account is closed.",
+    "statusCode": 400
+  },
+  "USER_FIELD_ALREADY_EXISTS": {
+    "status": "error",
+    "message": "User with this %s already exists.",
+    "statusCode": 400
+  },
+  "AGE_LESS_THAN_18": {
+    "status": "error",
+    "message": "You must be 18 years old to have a bank account.",
+    "statusCode": 400
+  },
+  "ACCOUNT_NOT_FOUND": {
+    "status": "error",
+    "message": "Account not found.",
+    "statusCode": 400
   }
 }
