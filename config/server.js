@@ -38,6 +38,9 @@ app.use("/auth/", AuthRoute);
 const UserRoute = require("../src/api/UserRoute")();
 app.use("/user/", UserRoute);
 
+const BeneficiaryRoute = require("../src/api/BeneficiaryRoute")();
+app.use("/beneficiary/", BeneficiaryRoute);
+
 app.use(/.*/, async (req, res) => {
   return ErrorManager.getError(res, "PAGE_NOT_FOUND");
 });
