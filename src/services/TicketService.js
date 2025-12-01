@@ -8,12 +8,11 @@ module.exports = {
   Find: async (where) => {
     return TicketModel.find(where);
   },
+  FindOne: async (where) => {
+    return TicketModel.findOne(where);
+  },
 
-  Reply: async (ticketId, replyObj) => {
-    return TicketModel.findByIdAndUpdate(
-      ticketId,
-      { $push: { replies: replyObj } },
-      { new: true },
-    );
+  Update: async (where, obj) => {
+    return TicketModel.findOneAndUpdate(where, obj, { new: true });
   },
 };
