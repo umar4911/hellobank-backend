@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const BeneficiaryController = require("../controllers/");
+const BeneficiaryController = require("../controllers/BeneficiaryController");
 const Middleware = require("../cors/Middleware");
 
 module.exports = () => {
