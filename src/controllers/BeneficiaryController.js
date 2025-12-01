@@ -79,7 +79,8 @@ module.exports = {
 
   Modify: async (req, res) => {
     try {
-      const { bid, nickname } = req.body;
+      const { bid } = req.params;
+      const { nickname } = req.body;
       if (!bid || !nickname) {
         return ErrorManager.getError(res, "INCOMPLETE_ARGS");
       }
@@ -113,7 +114,7 @@ module.exports = {
 
   Delete: async (req, res) => {
     try {
-      const { bid } = req.body;
+      const { bid } = req.params;
       if (!bid) {
         return ErrorManager.getError(res, "INCOMPLETE_ARGS");
       }
