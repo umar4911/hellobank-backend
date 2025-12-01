@@ -68,7 +68,6 @@ module.exports = {
         DBService.User.FindOne({ cnic }),
         DBService.User.FindOne({ email }),
       ]);
-
       if (CNICExists) {
         return ErrorManager.getError(res, "USER_FIELD_ALREADY_EXISTS", "CNIC");
       }

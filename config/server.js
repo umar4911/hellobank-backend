@@ -35,6 +35,9 @@ app.use((err, req, res, next) => {
 const AuthRoute = require("../src/api/AuthRoute")();
 app.use("/auth/", AuthRoute);
 
+const UserRoute = require("../src/api/UserRoute")();
+app.use("/user/", UserRoute);
+
 app.use(/.*/, async (req, res) => {
   return ErrorManager.getError(res, "PAGE_NOT_FOUND");
 });
