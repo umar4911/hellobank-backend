@@ -1,26 +1,25 @@
 const TransactionModel = require("../models/Transaction");
-const moment = require("moment");
 
 module.exports = {
   Create: async (obj) => {
     return TransactionModel.create(obj);
   },
 
-  List: async ({ userId, account_no, start, end }) => {
-    const filter = {};
+  List: async (a, start, end) => {
+    let filter = a ? { ...a } : {};
 
-    if (userId) filter.userId = userId;
-    if (account_no) filter.account_no = account_no;
+    if (start) {
+      const startDate = new Date(start);
+      const range = { $gte: startDate };
 
-    filter.time = {
-      $gte: new Date(start),
-      $lte: new Date(end),
-    };
+      if (end) {
+        const endDate = new Date(end);
+        range.$lte = endDate;
+      }
 
-    return TransactionModel.find(filter);
-  },
+      filter.time = range;
+    }
 
-  Find: async (where) => {
-    return TransactionModel.find(where);
+    return TransactionModel.find(filter).sort({ time: -1 });
   },
 };

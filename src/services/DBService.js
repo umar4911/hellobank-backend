@@ -3,6 +3,6 @@ module.exports = {
   Beneficiary: require("./BeneficiaryService"),
   Card: require("./CardService"),
   Product: require("./ProductService"),
-  Transactions: require("./TransactionService"),
+  Transaction: require("./TransactionService"),
   Ticket: require("./TicketService"),
 };

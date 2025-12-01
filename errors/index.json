@@ -58,5 +58,15 @@
     "status": "error",
     "message": "You cannot add yourself as your beneficiary.",
     "statusCode": 400
+  },
+  "MINIMUM_TRANSACTION_ERROR": {
+    "status": "error",
+    "message": "You can only make transaction of atleast Rs. 10.",
+    "statusCode": 400
+  },
+  "NOT_ENOUGH_BALANCE": {
+    "status": "error",
+    "message": "You do not have enough balance to make this transaction.",
+    "statusCode": 400
   }
 }
