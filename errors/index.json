@@ -28,5 +28,10 @@
     "status": "error",
     "message": "Wrong credentials entered.",
     "statusCode": 400
+  },
+  "ACCOUNT_CLOSED": {
+    "status": "error",
+    "message": "The account is closed.",
+    "statusCode": 400
   }
 }
