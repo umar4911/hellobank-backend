@@ -6,13 +6,11 @@ const TicketSchema = new mongoose.Schema(
     subject: { type: String, required: true },
     message: { type: String, required: true },
     status: { type: String, default: "open" },
-    replies: [
-      {
-        sender: String,
-        message: String,
-        createdAt: { type: Date, default: Date.now },
-      },
-    ],
+    reply: {
+      sender: String,
+      message: String,
+      createdAt: Date,
+    },
   },
   { timestamps: true },
 );
