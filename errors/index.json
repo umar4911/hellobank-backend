@@ -1,0 +1,32 @@
+{
+  "UNKNOWN_ERROR": {
+    "status": "error",
+    "message": "An unknown error occurred. Please try again later.",
+    "statusCode": 400
+  },
+  "PAGE_NOT_FOUND": {
+    "status": "error",
+    "message": "The requested page was not found. Please try again later.",
+    "statusCode": 404
+  },
+  "INVALID_ARGUMENTS": {
+    "status": "error",
+    "message": "Invalid arguments.",
+    "statusCode": 404
+  },
+  "UNAUTHORIZED": {
+    "status": "fail",
+    "message": "You are unauthorized to view this page.",
+    "statusCode": 400
+  },
+  "INCOMPLETE_ARGS": {
+    "status": "error",
+    "message": "Incomplete arguments provided. Please try again later.",
+    "statusCode": 401
+  },
+  "WRONG_CREDENTIALS": {
+    "status": "error",
+    "message": "Wrong credentials entered.",
+    "statusCode": 400
+  }
+}
