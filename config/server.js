@@ -41,6 +41,9 @@ app.use("/user/", UserRoute);
 const BeneficiaryRoute = require("../src/api/BeneficiaryRoute")();
 app.use("/beneficiary/", BeneficiaryRoute);
 
+const TransactionRoute = require("../src/api/TransactionRoute")();
+app.use("/transaction/", TransactionRoute);
+
 app.use(/.*/, async (req, res) => {
   return ErrorManager.getError(res, "PAGE_NOT_FOUND");
 });
