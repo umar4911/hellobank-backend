@@ -48,5 +48,15 @@
     "status": "error",
     "message": "Account not found.",
     "statusCode": 400
+  },
+  "BENEFICIARY_ALREADY_EXISTS": {
+    "status": "error",
+    "message": "Beneficiary already exists.",
+    "statusCode": 400
+  },
+  "BENEFICIARY_ITSELF": {
+    "status": "error",
+    "message": "You cannot add yourself as your beneficiary.",
+    "statusCode": 400
   }
 }
