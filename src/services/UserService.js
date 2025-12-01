@@ -5,7 +5,7 @@ module.exports = {
     return UserModel.create(obj);
   },
 
-  UpdateUser: async (where, obj) => {
+  UpdateUser: async (obj, where) => {
     return UserModel.findOneAndUpdate(where, obj, { new: true });
   },
 
