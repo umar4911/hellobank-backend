@@ -1,6 +1,7 @@
 const Status = require("../constants/Status.json");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
+const bcrypt = require("bcrypt");
 
 const Logger = require("../utils/Logger");
 const ErrorManager = require("../../errors/error-manager");
@@ -27,7 +28,7 @@ module.exports = {
       if (!User) {
         return ErrorManager.getError(res, "WRONG_CREDENTIALS");
       }
-      if (User.password !== password) {
+      if (!bcrypt.compareSync(password, User.password)) {
         return ErrorManager.getError(res, "WRONG_CREDENTIALS");
       }
 
@@ -96,7 +97,7 @@ module.exports = {
         bdate,
         email,
         account_no,
-        password,
+        password: bcrypt.hashSync(password, 10),
       });
 
       const logintoken = jwt.sign({ _id: User._id }, JwtKey);
