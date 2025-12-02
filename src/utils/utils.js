@@ -1,5 +1,5 @@
-const { EncryptionKey } = require("../../config");
 const fs = require("fs");
+const Admins = require("../constants/Admins.json");
 
 function capitalizeString(string) {
   if (string) {
@@ -35,9 +35,13 @@ function isEmail(email) {
   return false;
 }
 
+function getAdminDetails(email) {
+  return Admins.find((admin) => admin.email === email);
+}
 module.exports = {
   capitalizeString,
   GenerateRandomNum,
   format,
   isEmail,
+  getAdminDetails,
 };
