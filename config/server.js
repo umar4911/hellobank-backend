@@ -47,6 +47,9 @@ app.use("/transaction/", TransactionRoute);
 const TicketRoute = require("../src/api/TicketRoute")();
 app.use("/ticket/", TicketRoute);
 
+const AdminRoute = require("../src/api/AdminRoute")();
+app.use("/admin/", AdminRoute);
+
 app.use(/.*/, async (req, res) => {
   return ErrorManager.getError(res, "PAGE_NOT_FOUND");
 });
