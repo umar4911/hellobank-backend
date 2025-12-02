@@ -9,7 +9,11 @@ const logger = new Logger();
 
 const { JwtKey, environment } = require("../../config");
 const DBService = require("../services/DBService");
-const { GenerateRandomNum, isEmail } = require("../utils/utils");
+const {
+  GenerateRandomNum,
+  isEmail,
+  getAdminDetails,
+} = require("../utils/utils");
 
 module.exports = {
   Login: async (req, res) => {
@@ -100,6 +104,36 @@ module.exports = {
       return res.json({
         status: Status.SUCCESS,
         message: "Register successful.",
+        data: {
+          logintoken,
+        },
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
+  AdminLogin: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return ErrorManager.getError(res, "WRONG_CREDENTIALS");
+      }
+
+      const User = getAdminDetails(email);
+      if (!User) {
+        return ErrorManager.getError(res, "WRONG_CREDENTIALS");
+      }
+      if (User.password !== password) {
+        return ErrorManager.getError(res, "WRONG_CREDENTIALS");
+      }
+
+      const logintoken = jwt.sign({ email: User.email }, JwtKey);
+
+      return res.json({
+        status: Status.SUCCESS,
+        message: "Login successful.",
         data: {
           logintoken,
         },

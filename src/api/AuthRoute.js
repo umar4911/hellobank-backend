@@ -7,6 +7,7 @@ module.exports = () => {
   router.use(Middleware.NoAuthenticate);
   router.post("/login", AuthController.Login);
   router.post("/register", AuthController.Register);
+  router.post("/admin-login", AuthController.AdminLogin);
 
   return router;
 };

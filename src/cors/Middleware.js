@@ -3,6 +3,7 @@ const { JwtKey } = require("../../config");
 const DBService = require("../services/DBService");
 const Logger = require("../utils/Logger");
 const ErrorManager = require("../../errors/error-manager");
+const { getAdminDetails } = require("../utils/utils");
 
 const logger = new Logger();
 
@@ -28,6 +29,25 @@ module.exports = {
       }
       req.user = user;
 
+      next();
+    } catch (e) {
+      logger.error(e.message + "\n" + e.stack);
+      return ErrorManager.getError(res, "UNAUTHORIZED");
+    }
+  },
+  AdminAuth: async (req, res, next) => {
+    try {
+      let token = req.headers["x-access-token"] || req.headers["authorization"];
+      if (token && token.split(" ").length !== 1) token = token.split(" ")[1];
+
+      if (!token) {
+        return ErrorManager.getError(res, "UNAUTHORIZED");
+      }
+      const decoded = jwt.verify(token, JwtKey);
+      const user = getAdminDetails(decoded.email);
+      if (!user) {
+        return ErrorManager.getError(res, "UNAUTHORIZED");
+      }
       next();
     } catch (e) {
       logger.error(e.message + "\n" + e.stack);
