@@ -68,5 +68,40 @@
     "status": "error",
     "message": "You do not have enough balance to make this transaction.",
     "statusCode": 400
+  },
+  "LIMITED_REACHED": {
+    "status": "error",
+    "message": "Daily limit reached.",
+    "statusCode": 400
+  },
+  "TICKET_DOESNOT_EXISTS": {
+    "status": "error",
+    "message": "Ticket does not exist.",
+    "statusCode": 400
+  },
+  "TICKET_ALREADY_RESOLVED": {
+    "status": "error",
+    "message": "The ticket is already resolved.",
+    "statusCode": 400
+  },
+  "CARD_TYPE_ALREADY_EXISTS": {
+    "status": "error",
+    "message": "User already has an active card of type.",
+    "statusCode": 400
+  },
+  "NO_ACTIVE_CARD": {
+    "status": "error",
+    "message": "No active card found.",
+    "statusCode": 400
+  },
+  "WRONG_CARD_DETAILS": {
+    "status": "error",
+    "message": "Wrong card details entered.",
+    "statusCode": 400
+  },
+  "CARD_EXPIRED": {
+    "status": "error",
+    "message": "The card you entered has expired.",
+    "statusCode": 400
   }
 }
