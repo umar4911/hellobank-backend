@@ -35,6 +35,9 @@ app.use((err, req, res, next) => {
 const AuthRoute = require("../src/api/AuthRoute")();
 app.use("/auth/", AuthRoute);
 
+const ProductRoute = require("../src/api/ProductRoute")();
+app.use("/product/", ProductRoute);
+
 const UserRoute = require("../src/api/UserRoute")();
 app.use("/user/", UserRoute);
 
