@@ -12,9 +12,10 @@ const moment = require("moment");
 module.exports = {
   TransferMoney: async (req, res) => {
     try {
-      const { bid, amount } = req.body;
+      const { id } = req.params;
+      const { amount } = req.body;
 
-      if (!bid || !amount || isNaN(amount)) {
+      if (!amount || isNaN(amount)) {
         return ErrorManager.getError(res, "INCOMPLETE_ARGS");
       }
 
@@ -25,7 +26,7 @@ module.exports = {
       }
 
       const beneficiary = await DBService.Beneficiary.FindOne({
-        _id: bid,
+        _id: id,
         userId: req.user._id,
       });
 
