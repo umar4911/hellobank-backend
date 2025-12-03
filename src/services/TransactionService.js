@@ -10,10 +10,12 @@ module.exports = {
 
     if (start) {
       const startDate = new Date(start);
+      startDate.setHours(0, 0, 0);
       const range = { $gte: startDate };
 
       if (end) {
         const endDate = new Date(end);
+        endDate.setHours(23, 59, 59);
         range.$lte = endDate;
       }
 

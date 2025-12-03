@@ -90,7 +90,9 @@ module.exports = {
       }
 
       start = moment(start, "YYYY-MM-DD").toDate();
-      end = moment(end, "YYYY-MM-DD").toDate();
+      if (end) {
+        end = moment(end, "YYYY-MM-DD").toDate();
+      }
 
       const list = await DBService.Transaction.List(
         {
