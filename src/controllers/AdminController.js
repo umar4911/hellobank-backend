@@ -258,6 +258,15 @@ module.exports = {
         { _id: userId },
       );
 
+      await DBService.Transaction.Create({
+        userId: null,
+        name: "Admin",
+        account_no: user.account_no,
+        bank: "HelloBank",
+        amount: amt,
+        type: "transfer",
+      });
+
       return res.json({
         status: Status.SUCCESS,
         message: "Balance updated.",
