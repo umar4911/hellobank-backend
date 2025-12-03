@@ -6,4 +6,9 @@ module.exports = {
   DB: {
     database: process.env.DBURL || "",
   },
+  CARD_DAILY_LIMITS: {
+    Silver: 50000,
+    Gold: 100000,
+    Platinum: 250000,
+  },
 };
