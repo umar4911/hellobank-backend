@@ -1,0 +1,26 @@
+[
+  {
+    "id": "prod_basic_savings",
+    "name": "Basic Savings Plan",
+    "description": "Simple savings product with no monthly fee.",
+    "price": 5000
+  },
+  {
+    "id": "prod_premium_savings",
+    "name": "Premium Savings Plan",
+    "description": "Higher interest rate with priority support.",
+    "price": 15000
+  },
+  {
+    "id": "prod_investment_pack",
+    "name": "Investment Pack",
+    "description": "Bundle of investment tools and analytics.",
+    "price": 25000
+  },
+  {
+    "id": "prod_travel_insurance",
+    "name": "Travel Insurance",
+    "description": "Global travel coverage for 1 year.",
+    "price": 8000
+  }
+]
