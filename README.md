@@ -82,6 +82,7 @@ The backend provides REST APIs for user authentication, account management, tran
     │   ├── TicketRoute.js         # /ticket endpoints
     │   ├── TransactionRoute.js    # /transaction endpoints
     │   └── UserRoute.js           # /user endpoints
+    │   └── ProductRoute.js           # /product endpoints
     │
     ├── constants/       # Static JSON configs/constants
     │   ├── Admins.json  # Admin database
@@ -91,6 +92,7 @@ The backend provides REST APIs for user authentication, account management, tran
     │   ├── AuthController.js
     │   ├── BeneficiaryController.js
     │   ├── TicketController.js
+    │   ├── ProductController.js
     │   ├── TransactionController.js
     │   └── UserController.js
     │
@@ -100,7 +102,6 @@ The backend provides REST APIs for user authentication, account management, tran
     ├── models/          # Mongoose models / schemas
     │   ├── Beneficiary.js
     │   ├── Card.js
-    │   ├── Product.js
     │   ├── Ticket.js
     │   ├── Transaction.js
     │   └── User.js
@@ -109,7 +110,6 @@ The backend provides REST APIs for user authentication, account management, tran
     │   ├── BeneficiaryService.js
     │   ├── CardService.js
     │   ├── DBService.js          # Aggregates all services in one export
-    │   ├── ProductService.js
     │   ├── TicketService.js
     │   ├── TransactionService.js
     │   └── UserService.js

@@ -7,7 +7,7 @@ const ErrorManager = require("../../errors/error-manager");
 
 const logger = new Logger();
 
-const { environment } = require("../../config");
+const { environment, CARD_DAILY_LIMITS } = require("../../config");
 const DBService = require("../services/DBService");
 
 module.exports = {
@@ -81,7 +81,7 @@ module.exports = {
       const todaysPurchases = await DBService.Transaction.List(
         {
           userId,
-          type: "product",
+          type: "purchase",
           cardId,
         },
         startOfDay,
@@ -102,7 +102,7 @@ module.exports = {
         name,
         account_no: null,
         amount,
-        type: "product",
+        type: "purchase",
         cardId,
       });
 

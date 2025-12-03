@@ -103,7 +103,8 @@ module.exports = {
       );
 
       const data = list.map((x) => {
-        const isDebit = x.userId.toString() === req.user._id.toString();
+        const isDebit =
+          x?.userId && x?.userId.toString() === req.user._id.toString();
         return {
           tid: x._id,
           time: x.time,
