@@ -11,11 +11,9 @@ const DBService = require("../services/DBService");
 const { GenerateRandomNum } = require("../utils/utils");
 
 module.exports = {
-  // ---------- USERS ----------
   GetAccountList: async (req, res) => {
     try {
-      // get all users with selected fields
-      const users = await DBService.User.Find({}); // you'll need Find() in UserService
+      const users = await DBService.User.FindUser({});
 
       const data = users.map((u) => ({
         _id: u._id,
@@ -23,10 +21,8 @@ module.exports = {
         lname: u.lname,
         cnic: u.cnic,
         account_no: u.account_no,
-        closed: u.closed,
         balance: u.balance,
-        // if you later re-add account type, you can expose it here
-        // type: u.type,
+        closed: u.closed,
       }));
 
       return res.json({
@@ -41,47 +37,8 @@ module.exports = {
     }
   },
 
-  // NOTE: this assumes you have some 'type' field on user.
-  // If you truly removed plans from users, either delete this API
-  // or repurpose it.
-  ChangeAccountPlan: async (req, res) => {
-    const { userId, type } = req.body;
-    if (
-      !userId ||
-      !type ||
-      (type !== "Basic" && type !== "Premium" && type !== "World")
-    ) {
-      return ErrorManager.getError(res, "INCOMPLETE_ARGS");
-    }
-
-    try {
-      const user = await DBService.User.FindOne({ _id: userId });
-
-      if (!user) {
-        return ErrorManager.getError(res, "ACCOUNT_NOT_FOUND");
-      }
-      if (user.closed) {
-        return ErrorManager.getError(res, "ACCOUNT_CLOSED");
-      }
-
-      await DBService.User.UpdateUser({ type }, { _id: userId });
-
-      return res.json({
-        status: Status.SUCCESS,
-        message: "Account updated.",
-        data: {},
-      });
-    } catch (e) {
-      ErrorManager.getError(res, "UNKNOWN_ERROR");
-      logger.error(e.message + "\n" + e.stack);
-      if (environment === "prod") throw e;
-    }
-  },
-
-  // ---------- TICKETS ----------
   GetTickets: async (req, res) => {
     try {
-      // your TicketSchema default status is "open"
       const data = await DBService.Ticket.Find({ status: "open" });
 
       return res.json({
@@ -137,18 +94,15 @@ module.exports = {
     }
   },
 
-  // ---------- CARDS ----------
   GetUserCards: async (req, res) => {
     try {
-      const { userId } = req.query;
+      const { userId } = req.params;
 
       if (!userId) {
         return ErrorManager.getError(res, "INCOMPLETE_ARGS");
       }
 
-      const data = await DBService.Card.GetCards({
-        userId,
-      });
+      const data = await DBService.Card.GetCards({ userId });
 
       return res.json({
         status: Status.SUCCESS,
@@ -163,7 +117,9 @@ module.exports = {
   },
 
   IssueCard: async (req, res) => {
-    const { userId, type } = req.body;
+    const { userId } = req.params;
+    const { type } = req.body;
+
     if (
       !userId ||
       !type ||
@@ -174,6 +130,7 @@ module.exports = {
 
     try {
       const user = await DBService.User.FindOne({ _id: userId });
+
       const existingCards = await DBService.Card.GetCards({
         userId,
         type,
@@ -230,12 +187,7 @@ module.exports = {
         return ErrorManager.getError(res, "NO_ACTIVE_CARD");
       }
 
-      await DBService.Card.UpdateCard(
-        { _id: cardId },
-        {
-          isblocked: true,
-        },
-      );
+      await DBService.Card.UpdateCard({ _id: cardId }, { isblocked: true });
 
       return res.json({
         status: Status.SUCCESS,
@@ -249,9 +201,8 @@ module.exports = {
     }
   },
 
-  // ---------- ACCOUNT ----------
   CloseUserAccount: async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.params;
     if (!userId) {
       return ErrorManager.getError(res, "INCOMPLETE_ARGS");
     }
@@ -261,14 +212,14 @@ module.exports = {
       if (!user) {
         return ErrorManager.getError(res, "ACCOUNT_NOT_FOUND");
       }
+
       if (user.closed) {
         return ErrorManager.getError(res, "ACCOUNT_CLOSED");
       }
 
-      await Promise.all([
-        DBService.User.UpdateUser({ closed: true }, { _id: userId }),
-        DBService.Card.UpdateCard({ userId }, { isblocked: true }),
-      ]);
+      await DBService.User.UpdateUser({ closed: true }, { _id: userId });
+
+      await DBService.Card.UpdateCard({ userId }, { isblocked: true });
 
       return res.json({
         status: Status.SUCCESS,
@@ -283,7 +234,9 @@ module.exports = {
   },
 
   AddMoney: async (req, res) => {
-    const { userId, amount } = req.body;
+    const { userId } = req.params;
+    const { amount } = req.body;
+
     if (!userId || !amount || isNaN(amount)) {
       return ErrorManager.getError(res, "INCOMPLETE_ARGS");
     }
@@ -295,6 +248,7 @@ module.exports = {
       if (!user) {
         return ErrorManager.getError(res, "ACCOUNT_NOT_FOUND");
       }
+
       if (user.closed) {
         return ErrorManager.getError(res, "ACCOUNT_CLOSED");
       }
