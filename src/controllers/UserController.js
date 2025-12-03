@@ -27,6 +27,22 @@ module.exports = {
       if (environment === "prod") throw e;
     }
   },
+  GetCards: async (req, res) => {
+    const data = await DBService.Card.GetCards({
+      userId: req.user._id,
+    });
+    try {
+      return res.json({
+        status: Status.SUCCESS,
+        message: "User Cards.",
+        data,
+      });
+    } catch (e) {
+      ErrorManager.getError(res, "UNKNOWN_ERROR");
+      logger.error(e.message + "\n" + e.stack);
+      if (environment === "prod") throw e;
+    }
+  },
   UpdateEmail: async (req, res) => {
     try {
       const { email } = req.body;
