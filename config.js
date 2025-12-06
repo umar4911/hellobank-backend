@@ -11,4 +11,9 @@ module.exports = {
     Gold: 100000,
     Platinum: 250000,
   },
+  Chatwoot: {
+    baseUrl: process.env.CHATWOOT_BASE_URL,
+    accountId: process.env.CHATWOOT_ACCOUNT_ID,
+    botToken: process.env.CHATWOOT_BOT_TOKEN,
+  },
 };
