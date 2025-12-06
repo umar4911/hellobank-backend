@@ -38,6 +38,9 @@ app.use("/auth/", AuthRoute);
 const ProductRoute = require("../src/api/ProductRoute")();
 app.use("/product/", ProductRoute);
 
+const ChatwootRoute = require("../src/api/ChatwootRoute")();
+app.use("/chatwoot/", ChatwootRoute);
+
 const UserRoute = require("../src/api/UserRoute")();
 app.use("/user/", UserRoute);
 
